@@ -67,7 +67,7 @@
     }];
     
     //缓冲进度回调
-    [_manager setCurrentloadedTimeCallBack:^(AVPlayer *player, CGFloat time) {
+    [_manager setCurrentLoadedTimeCallBack:^(AVPlayer *player, CGFloat time) {
         __strong typeof(self) strongSelf = weakSelf;
         if (strongSelf.totalTime) {
             strongSelf.loadProgress.progress = time / strongSelf.totalTime;

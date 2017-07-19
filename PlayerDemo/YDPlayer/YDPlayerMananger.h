@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, YDPlayerStatus) {
 /**
  Item缓冲进度回调
  */
-@property (nonatomic, copy) void(^currentloadedTimeCallBack)(AVPlayer *player, CGFloat time);
+@property (nonatomic, copy) void(^currentLoadedTimeCallBack)(AVPlayer *player, CGFloat time);
 
 /**
  Player状态改变回调

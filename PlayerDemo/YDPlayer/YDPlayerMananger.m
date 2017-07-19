@@ -22,6 +22,9 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
 - (instancetype)init
 {
     if (self = [super init]) {
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [audioSession setActive:YES error:nil];
         self.player = [[AVPlayer alloc] init];
         [self addNotificationAndObserver];
     }
@@ -30,10 +33,8 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
 
 - (instancetype)initWithURL:(NSURL *)url
 {
-    if (self = [super init]) {
-        self.player = [[AVPlayer alloc] init];
+    if (self = [self init]) {
         [self replaceCurrentItemWithURL:url];
-        [self addNotificationAndObserver];
     }
     return self;
 }
@@ -102,18 +103,13 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
 - (void)stop
 {
     [self.player pause];
-    self.player.rate = 0;
-    [_currentItem seekToTime:kCMTimeZero];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [_currentItem cancelPendingSeeks];
-        [_currentItem.asset cancelLoading];
-    });
+    [_currentItem cancelPendingSeeks];
     self.playStatus = YDPlayerStatusFinished;
 }
 
 - (void)seekToTime:(CGFloat)time
 {
-    [_currentItem seekToTime:CMTimeMakeWithSeconds(time, 1.0)];
+    [_currentItem seekToTime:CMTimeMakeWithSeconds(time, 1.0) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
 }
 
 #pragma mark - 私有方法
@@ -123,6 +119,10 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
 {
     // 添加播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    // 添加打断播放的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interruptionComing:) name:AVAudioSessionInterruptionNotification object:nil];
+    // 添加插拔耳机的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routeChanged:) name:AVAudioSessionRouteChangeNotification object:nil];
     // 添加观察者监控播放器状态
     [self addObserver:self forKeyPath:@"playStatus" options:NSKeyValueObservingOptionNew context:nil];
     // 添加观察者监控进度
@@ -197,8 +197,8 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
             }
         }
         
-        if (self.currentloadedTimeCallBack) {
-            self.currentloadedTimeCallBack(_player, loadedTime);
+        if (self.currentLoadedTimeCallBack) {
+            self.currentLoadedTimeCallBack(_player, loadedTime);
         }
     }
 }
@@ -214,4 +214,31 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
     }
 }
 
+// 插拔耳机通知
+- (void)routeChanged:(NSNotification *)notification
+{
+    NSDictionary *dic = notification.userInfo;
+    int changeReason = [dic[AVAudioSessionRouteChangeReasonKey] intValue];
+    //旧输出不可用
+    if (changeReason == AVAudioSessionRouteChangeReasonOldDeviceUnavailable) {
+        AVAudioSessionRouteDescription *routeDescription = dic[AVAudioSessionRouteChangePreviousRouteKey];
+        AVAudioSessionPortDescription *portDescription = [routeDescription.outputs firstObject];
+        //原设备为耳机则暂停
+        if ([portDescription.portType isEqualToString:@"Headphones"]) {
+            [self pause];
+        }
+    }
+}
+
+// 来电、闹铃打断播放通知
+- (void)interruptionComing:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    AVAudioSessionInterruptionType type = [userInfo[AVAudioSessionInterruptionTypeKey] intValue];
+    if (type == AVAudioSessionInterruptionTypeBegan) {
+        [self pause];
+    } else {
+        [self play];
+    }
+}
 @end
