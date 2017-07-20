@@ -219,11 +219,11 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
 {
     NSDictionary *dic = notification.userInfo;
     int changeReason = [dic[AVAudioSessionRouteChangeReasonKey] intValue];
-    //旧输出不可用
+    // 旧输出不可用
     if (changeReason == AVAudioSessionRouteChangeReasonOldDeviceUnavailable) {
         AVAudioSessionRouteDescription *routeDescription = dic[AVAudioSessionRouteChangePreviousRouteKey];
         AVAudioSessionPortDescription *portDescription = [routeDescription.outputs firstObject];
-        //原设备为耳机则暂停
+        // 原设备为耳机则暂停
         if ([portDescription.portType isEqualToString:@"Headphones"]) {
             [self pause];
         }
@@ -237,8 +237,7 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
     AVAudioSessionInterruptionType type = [userInfo[AVAudioSessionInterruptionTypeKey] intValue];
     if (type == AVAudioSessionInterruptionTypeBegan) {
         [self pause];
-    } else {
-        [self play];
     }
 }
+
 @end
