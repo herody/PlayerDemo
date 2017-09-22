@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, YDPlayerStatus) {
 };
 
 
-@interface YDPlayerMananger : NSObject
+@interface YDPlayerManager : NSObject
 
 /**
  播放器
@@ -115,9 +115,9 @@ typedef NS_ENUM(NSInteger, YDPlayerStatus) {
 /**
  播放某个链接
 
- @param urlStr 需要播放的链接
+ @param url 需要播放的链接
  */
-- (void)playWithUrl:(NSString *)urlStr;
+- (void)playWithUrl:(NSURL *)url;
 
 
 /**

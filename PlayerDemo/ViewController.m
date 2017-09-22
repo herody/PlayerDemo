@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "YDPlayerMananger.h"
+#import "YDPlayerManager.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *curTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
 
-@property (nonatomic, strong) YDPlayerMananger *manager;
+@property (nonatomic, strong) YDPlayerManager *manager;
 @property (nonatomic, assign) CGFloat totalTime;
 @end
 
@@ -34,7 +34,7 @@
 {
 //    NSURL *url = [NSURL URLWithString:@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"];
     NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"如烟-五月天" ofType:@"mp3"]];
-    self.manager = [[YDPlayerMananger alloc] initWithURL:url];
+    self.manager = [[YDPlayerManager alloc] initWithURL:url];
     
     //展示播放器界面
     [_manager showPlayerInView:self.playerView withFrame:self.playerView.bounds];

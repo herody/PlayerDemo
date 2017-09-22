@@ -13,7 +13,7 @@
 		9EBD197F1F16163B00EA0A2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD197D1F16163B00EA0A2C /* Main.storyboard */; };
 		9EBD19811F16163B00EA0A2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD19801F16163B00EA0A2C /* Assets.xcassets */; };
 		9EBD19841F16163B00EA0A2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD19821F16163B00EA0A2C /* LaunchScreen.storyboard */; };
-		9EBD198E1F16167500EA0A2C /* YDPlayerMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD198D1F16167500EA0A2C /* YDPlayerMananger.m */; };
+		9EBD198E1F16167500EA0A2C /* YDPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD198D1F16167500EA0A2C /* YDPlayerManager.m */; };
 		9EBD19931F177ECC00EA0A2C /* 如烟-五月天.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9EBD19921F177ECC00EA0A2C /* 如烟-五月天.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -28,8 +28,8 @@
 		9EBD19801F16163B00EA0A2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EBD19831F16163B00EA0A2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EBD19851F16163B00EA0A2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9EBD198C1F16167500EA0A2C /* YDPlayerMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayerMananger.h; sourceTree = "<group>"; };
-		9EBD198D1F16167500EA0A2C /* YDPlayerMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayerMananger.m; sourceTree = "<group>"; };
+		9EBD198C1F16167500EA0A2C /* YDPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDPlayerManager.h; sourceTree = "<group>"; };
+		9EBD198D1F16167500EA0A2C /* YDPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDPlayerManager.m; sourceTree = "<group>"; };
 		9EBD19921F177ECC00EA0A2C /* 如烟-五月天.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "如烟-五月天.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,8 +89,8 @@
 		9EBD198B1F16167500EA0A2C /* YDPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				9EBD198C1F16167500EA0A2C /* YDPlayerMananger.h */,
-				9EBD198D1F16167500EA0A2C /* YDPlayerMananger.m */,
+				9EBD198C1F16167500EA0A2C /* YDPlayerManager.h */,
+				9EBD198D1F16167500EA0A2C /* YDPlayerManager.m */,
 			);
 			path = YDPlayer;
 			sourceTree = "<group>";
@@ -168,7 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EBD198E1F16167500EA0A2C /* YDPlayerMananger.m in Sources */,
+				9EBD198E1F16167500EA0A2C /* YDPlayerManager.m in Sources */,
 				9EBD197C1F16163B00EA0A2C /* ViewController.m in Sources */,
 				9EBD19791F16163B00EA0A2C /* AppDelegate.m in Sources */,
 				9EBD19761F16163B00EA0A2C /* main.m in Sources */,

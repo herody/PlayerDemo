@@ -6,16 +6,16 @@
 //  Copyright © 2017年 杭州魔品科技股份有限公司. All rights reserved.
 //
 
-#import "YDPlayerMananger.h"
+#import "YDPlayerManager.h"
 
 NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotification";
 
-@interface YDPlayerMananger ()
+@interface YDPlayerManager ()
 @property (nonatomic, strong) id timeObserver; // 监控播放进度的观察者
 
 @end
 
-@implementation YDPlayerMananger
+@implementation YDPlayerManager
 
 #pragma mark - 生命周期
 
@@ -41,7 +41,7 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
 
 + (instancetype)shareManager
 {
-    static YDPlayerMananger *manager = nil;
+    static YDPlayerManager *manager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[self alloc] init];
@@ -80,9 +80,9 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
     [_currentItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
 }
 
-- (void)playWithUrl:(NSString *)urlStr
+- (void)playWithUrl:(NSURL *)url
 {
-    [self replaceCurrentItemWithURL:[NSURL URLWithString:urlStr]];
+    [self replaceCurrentItemWithURL:url];
     [self play];
 }
 
