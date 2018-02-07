@@ -103,6 +103,7 @@ NSString * const YDPlayerDidStartPlayNotification = @"YDPlayerDidStartPlayNotifi
 - (void)stop
 {
     [self.player pause];
+    [_currentItem seekToTime:kCMTimeZero toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     [_currentItem cancelPendingSeeks];
     self.playStatus = YDPlayerStatusFinished;
 }
