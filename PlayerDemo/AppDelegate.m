@@ -3,7 +3,7 @@
 //  PlayerDemo
 //
 //  Created by 侯亚迪 on 17/7/12.
-//  Copyright © 2017年 杭州魔品科技. All rights reserved.
+//  Copyright © 2017年 侯亚迪. All rights reserved.
 //
 
 #import "AppDelegate.h"
